@@ -2,6 +2,8 @@
 
 Various ways to create a Flask/non-Flask Server
 
+_These tasks were created and solved by me._
+
 Create a web app that handles the 3 tasks mentioned
 
 The following consumes form data and returns text/html
@@ -43,7 +45,7 @@ Test
 
 - 2a. Must be authenticated using basic auth via header, return 401 if auth provided but incorrect
 
-- 2b. if no authentication sent, return 403
+- 2b. if no authentication sent, return 401
 
 - 2c. if not a POST req, return 405
 
@@ -107,4 +109,15 @@ $ curl -v -X PUT -H "Authorization: <OAuth_ACCESS_TOKEN>" -d "set_message=Hello 
 < Content-Length: XXX
 <
 {"mymessage":"sending req", "flask_app":"True"}
+```
+
+# Env file
+
+Create a `.env` file in each Python Directory as needed
+
+```bash
+# Example Env File Contents
+
+BASIC_AUTHENTICATION="Basic dXNlcm5hbWU6cGFzc3dvcmQ="
+OAUTH_AUTHENTICATION="Bearer eyJzdWIiOiJqYW5lZG9lQGV4YW1wbGUuY29tIiwibmFtZSI6IkphbmUgRG9lIiwiaWF0IjoxNTQ2MzAwODAwLCJleHAiOjE4OTM0NTYwMDB9"
 ```

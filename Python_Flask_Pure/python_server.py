@@ -1,5 +1,3 @@
-# https://stackoverflow.com/questions/6760685/creating-a-singleton-in-python
-
 import os
 from dotenv import load_dotenv
 from flask import Flask, request, abort, make_response
@@ -48,10 +46,7 @@ def tests_endpoint():
     header_auth = request.headers.get("Authorization", None)
     auth = os.environ.get("BASIC_AUTHENTICATION")
 
-    if not header_auth:
-        abort(403)
-
-    elif header_auth != auth:
+    if not header_auth or header_auth != auth:
         abort(401)
 
     if not data and data != "" or form_length > 1:
