@@ -17,7 +17,7 @@ def test_tests_endpoint_no_auth(client):
 
     response = client.post("/tests", data=mock_data, content_type=mock_type)
 
-    assert request.form.get("set_message") == "Hello World"
+    assert request.form.get("set_message") == mock_data["set_message"]
     assert response.status_code == 401
 
 
