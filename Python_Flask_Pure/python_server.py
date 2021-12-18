@@ -67,10 +67,7 @@ def fixes_endpoint(num):
     data = request.form.get("set_message", None)
     all_data = request.form
 
-    if not header_auth:
-        abort(403)
-
-    elif header_auth != auth:
+    if not header_auth or header_auth != auth:
         abort(401)
 
     elif num != "1":

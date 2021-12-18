@@ -92,7 +92,7 @@ Test
 3. A PUT req to /fixes/id/1 endpoint with a body of your choosing (Including set_message) and return everything submitted with a 201
 
 - 3a. Must be authenticated via OAuth 2, return 401 if auth provided but incorrect
-- 3b. if no authentication sent, return 403
+- 3b. if no authentication sent, return 401
 - 3c. if not a PUT req, return 405
 - 3d. if req is to the wrong id number, return 400
 - 3e. if no data is provided, return a 400 error

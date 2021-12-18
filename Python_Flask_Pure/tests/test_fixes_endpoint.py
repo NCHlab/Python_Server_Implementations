@@ -18,7 +18,7 @@ def test_fixes_endpoint_no_auth(client):
     response = client.put("/fixes/id/1", data=mock_data, content_type=mock_type)
 
     assert request.form.get("set_message") == "Hello World"
-    assert response.status_code == 403
+    assert response.status_code == 401
 
 
 @pytest.mark.order(12)
