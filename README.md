@@ -164,12 +164,21 @@ curl -v -H "Authorization: <OAuth_ACCESS_TOKEN>" -H "Content-Type: application/j
 
 Create a `.env` file in each Python Directory as needed
 
+
 ```bash
 # Example Env File Contents
 
 BASIC_AUTHENTICATION="Basic dXNlcm5hbWU6cGFzc3dvcmQ="
 OAUTH_AUTHENTICATION="Bearer eyJzdWIiOiJqYW5lZG9lQGV4YW1wbGUuY29tIiwibmFtZSI6IkphbmUgRG9lIiwiaWF0IjoxNTQ2MzAwODAwLCJleHAiOjE4OTM0NTYwMDB9"
 ```
+
+in the root directory of this repo, create a .env file:
+
+```bash
+export FLASK_ENV=development
+```
+
+> Note: `connexion` fails to reload the server when a .env file is present in root directory. rename the file if required.
 
 # Notes
 

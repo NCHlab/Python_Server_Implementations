@@ -28,7 +28,9 @@ def test_tests_endpoint_wrong_auth(client):
     mock_data = {"set_message": "Hello World"}
     mock_type = "application/x-www-form-urlencoded"
 
-    response = client.post("/tests", data=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.post(
+        "/tests", data=mock_data, content_type=mock_type, headers=mock_req_headers
+    )
 
     assert response.status_code == 401
 
@@ -51,7 +53,9 @@ def test_tests_endpoint_too_much_data(client):
     mock_data = {"set_message": "Hello World", "message2": "true"}
     mock_type = "application/x-www-form-urlencoded"
 
-    response = client.post("/tests", data=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.post(
+        "/tests", data=mock_data, content_type=mock_type, headers=mock_req_headers
+    )
 
     assert response.status_code == 400
 
@@ -63,8 +67,9 @@ def test_tests_endpoint_post_route_success(client):
     mock_data = {"set_message": "Hello World"}
     mock_type = "application/x-www-form-urlencoded"
 
-    response = client.post("/tests", data=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.post(
+        "/tests", data=mock_data, content_type=mock_type, headers=mock_req_headers
+    )
 
     assert request.form.get("set_message") == "Hello World"
-    assert response.status_code == 200
-    assert response.headers.get("Content-Length") == "0"
+    assert response.status_code == 204

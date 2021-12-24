@@ -74,5 +74,4 @@ def test_tests_endpoint_post_route_success(client):
     )
 
     assert request.json == mock_data
-    assert response.status_code == 200
-    assert response.headers.get("Content-Length") == "0"
+    assert response.status_code == 204
