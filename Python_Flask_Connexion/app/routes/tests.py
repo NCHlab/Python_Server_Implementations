@@ -1,4 +1,7 @@
+from flask import request, abort
+
 from app.core.configs import Config
+from app.core.utils import parse_data, validate_data
 
 
 def tests_endpoint(body):
@@ -8,12 +11,13 @@ def tests_endpoint(body):
 
     response = "", 204
 
+    json_data = parse_data(request)
+    validate_data(json_data)
+
+    if len(body) != 1:
+        abort(400, "Only 'set_message' allowed in body")
+
     # As a result of connexion handling some bad params, can assume set_message is in body
-
-    if len(body) > 1:
-        response = {"error": "Only 'set_message' allowed in body"}, 400
-        return response
-
     config._message = body["set_message"]
 
     return response

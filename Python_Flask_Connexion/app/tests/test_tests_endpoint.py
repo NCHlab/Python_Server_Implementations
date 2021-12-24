@@ -4,9 +4,7 @@ import os
 from dotenv import load_dotenv
 from flask import request
 
-# load_dotenv("../.env")
 load_dotenv(dotenv_path=os.path.dirname(os.path.realpath(__file__)) + "/../.env")
-
 auth = os.environ.get("BASIC_AUTHENTICATION")
 
 
@@ -44,6 +42,7 @@ def test_tests_endpoint_no_data(client):
 
     response = client.post("/tests", content_type=mock_type, headers=mock_req_headers)
 
+    assert "Data must be sent as JSON" in response.json["error"]
     assert response.status_code == 400
 
 

@@ -6,8 +6,7 @@ info:
     email: admin@nayamc.com
   version: 1.0.0
 servers:
-  - url: http://127.0.0.1:4004/
-
+  - url: http://127.0.0.1:4004/api/v1
 paths:
   /hello:
     get:
@@ -80,6 +79,57 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Api_400_Response"
+  /fixes/id/{num}:
+    put:
+      tags:
+        - fixes
+      summary: Send a PUT Req to fixes endpoint
+      description: Returns everything sent in the body
+      operationId: fixes_endpoint
+      x-openapi-router-controller: app.routes.fixes
+      parameters:
+        - name: num
+          in: path
+          description: ID of fixes
+          required: true
+          schema:
+            type: string
+            format: path
+      requestBody:
+        required: true
+        description: fixes object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/msg_object"
+      security:
+        - BearerAuth: []
+      x-codegen-request-body-name: body
+      responses:
+        400:
+          description: Invalid Params
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        401:
+          description: Not Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        405:
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
 
 components:
   schemas:
@@ -111,3 +161,4 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+      x-bearerInfoFunc: app.core.authentication.validate_bearer_token
