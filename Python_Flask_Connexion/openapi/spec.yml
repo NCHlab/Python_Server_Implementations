@@ -1,0 +1,164 @@
+openapi: 3.0.0
+info:
+  title: Swagger Connexion Flask Server
+  description: "This is a API server based around connexion. See [Github](https://github.com/NCHlab/Python_Server_Implementations) repository for more information"
+  contact:
+    email: admin@nayamc.com
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:4004/api/v1
+paths:
+  /hello:
+    get:
+      tags:
+        - hello
+      summary: Send a GET Req to hello endpoint
+      description: Request
+      operationId: hello_endpoint
+      x-openapi-router-controller: app.routes.hello
+      parameters:
+        - name: message
+          in: query
+          description: Message Value
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_200_Response"
+        400:
+          description: Invalid Params
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+  /tests:
+    post:
+      tags:
+        - "tests"
+      summary: Send a POST Req to test endpoint
+      description: test
+      operationId: tests_endpoint
+      x-openapi-router-controller: app.routes.tests
+      requestBody:
+        required: true
+        description: Tests object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/msg_object"
+      security:
+        - BasicAuth: []
+      x-codegen-request-body-name: body
+      responses:
+        400:
+          description: Invalid Params
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        401:
+          description: Not Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        405:
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+  /fixes/id/{num}:
+    put:
+      tags:
+        - fixes
+      summary: Send a PUT Req to fixes endpoint
+      description: Returns everything sent in the body
+      operationId: fixes_endpoint
+      x-openapi-router-controller: app.routes.fixes
+      parameters:
+        - name: num
+          in: path
+          description: ID of fixes
+          required: true
+          schema:
+            type: string
+            format: path
+      requestBody:
+        required: true
+        description: fixes object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/msg_object"
+      security:
+        - BearerAuth: []
+      x-codegen-request-body-name: body
+      responses:
+        400:
+          description: Invalid Params
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        401:
+          description: Not Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+        405:
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_400_Response"
+
+components:
+  schemas:
+    msg_object:
+      type: object
+      properties:
+        set_message:
+          type: string
+      required:
+        - set_message
+      example: { "set_message": "My String Value" }
+    Api_200_Response:
+      type: object
+      properties:
+        set_message:
+          type: string
+          example: Query Value
+    Api_400_Response:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Error Response
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: app.core.authentication.validate_basic_auth
+    BearerAuth:
+      type: http
+      scheme: bearer
+      x-bearerInfoFunc: app.core.authentication.validate_bearer_token

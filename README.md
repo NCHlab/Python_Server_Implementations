@@ -63,7 +63,7 @@ Test
 
 - 2d. if no param or more than 1 param given in body, reject with 400
 
-- 2e. after correctly sending to a req to this endpoint, set_message value should be returned in the header to responses to /hello endpoint
+- 2e. after correctly sending to a req to this endpoint, return a 204 and set_message value should be returned in the header to responses to /hello endpoint
 
 Example 2:
 
@@ -77,7 +77,7 @@ $ curl -v -H "Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=" -d "set_message=Hel
 > Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 > Content-Length: 12
 > Content-Type: application/x-www-form-urlencoded
-< HTTP/1.0 200 OK
+< HTTP/1.0 204 NO CONTENT
 < Content-Type: text/html; charset=utf-8
 < Content-Length: 0
 <
@@ -90,7 +90,7 @@ curl -v -H "Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=" -H "Content-Type: app
 > Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 > Content-Length: 12
 > Content-Type: application/json
-< HTTP/1.0 200 OK
+< HTTP/1.0 204 NO CONTENT
 < Content-Type: text/html; charset=utf-8
 < Content-Length: 0
 <
@@ -170,3 +170,8 @@ Create a `.env` file in each Python Directory as needed
 BASIC_AUTHENTICATION="Basic dXNlcm5hbWU6cGFzc3dvcmQ="
 OAUTH_AUTHENTICATION="Bearer eyJzdWIiOiJqYW5lZG9lQGV4YW1wbGUuY29tIiwibmFtZSI6IkphbmUgRG9lIiwiaWF0IjoxNTQ2MzAwODAwLCJleHAiOjE4OTM0NTYwMDB9"
 ```
+
+# Notes
+
+- When using connexion, to access the swagger webpage, go to: `http://localhost:4004/api/v1/ui/`
+- To view the Schema online: `http://localhost:4004/api/v1/openapi.json`
