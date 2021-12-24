@@ -19,7 +19,7 @@ def tests_endpoint():
     if not data_msg or len(json_data) > 1:
         abort(400, "Only 'set_message' allowed in body")
 
-    response = "", 200
+    response = "", 204
     config._message = data_msg
 
     return response

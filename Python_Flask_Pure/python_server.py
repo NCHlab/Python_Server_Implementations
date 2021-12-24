@@ -52,7 +52,7 @@ def tests_endpoint():
     if not data and data != "" or form_length > 1:
         abort(400)
 
-    response = "", 200
+    response = "", 204
     config._message = data
 
     return response
