@@ -14,7 +14,7 @@ The following servers consume JSON data and returns JSON (therefore input curl a
 
 - Python_Flask_Pure_API_v1/2 --> Runs as API that returns JSON
 - Python_Flask_Connexion --> Runs as API that returns JSON
-- Python_Flask_RestX --> Runs as API that returns JSON
+- ~~Python_Flask_RestX~~ --> Runs as API that returns JSON (Incomplete and won't bother due to it being In my opinion, a bad framework that is barely documented well)
 - Python_FastAPI --> Runs as API that returns JSON
 
 ---
