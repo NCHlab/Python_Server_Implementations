@@ -1,0 +1,2 @@
+I decided to stop bothering with creating a server using Flask-RestX as this extension does not have good documentation
+and I would rather define my spec in a yml file (and use connexion) than write bits all over my application.
