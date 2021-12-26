@@ -10,11 +10,14 @@ The following consumes form data and returns text/html
 
 - Python_Flask_Pure --> Runs as General Web Server -- Consumes any data
 
-The following servers consume JSON data and returns JSON (therefore input curl args will differ to example)
+The following Flask servers consume JSON data and returns JSON (therefore input curl args will differ to example)
 
 - Python_Flask_Pure_API_v1/2 --> Runs as API that returns JSON
 - Python_Flask_Connexion --> Runs as API that returns JSON
 - ~~Python_Flask_RestX~~ --> Runs as API that returns JSON (Incomplete and won't bother due to it being In my opinion, a bad framework that is barely documented well)
+
+Non Flask Server:
+
 - Python_FastAPI --> Runs as API that returns JSON
 
 ---
