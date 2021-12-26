@@ -14,7 +14,7 @@ def test_tests_endpoint_no_auth(client):
     mock_data = {"set_message": "Hello World"}
     mock_type = "application/json"
 
-    response = client.post("/tests", json=mock_data, content_type=mock_type)
+    response = client.post("/api/v1/tests", json=mock_data, content_type=mock_type)
 
     assert request.json == mock_data
     assert response.status_code == 401
@@ -28,7 +28,10 @@ def test_tests_endpoint_wrong_auth(client):
     mock_type = "application/json"
 
     response = client.post(
-        "/tests", json=mock_data, content_type=mock_type, headers=mock_req_headers
+        "/api/v1/tests",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
     )
 
     assert response.status_code == 401
@@ -40,7 +43,9 @@ def test_tests_endpoint_no_data(client):
     mock_req_headers = {"Authorization": auth}
     mock_type = "application/json"
 
-    response = client.post("/tests", content_type=mock_type, headers=mock_req_headers)
+    response = client.post(
+        "/api/v1/tests", content_type=mock_type, headers=mock_req_headers
+    )
 
     assert "Data must be sent as JSON" in response.json["error"]
     assert response.status_code == 400
@@ -54,7 +59,10 @@ def test_tests_endpoint_too_much_data(client):
     mock_type = "application/json"
 
     response = client.post(
-        "/tests", json=mock_data, content_type=mock_type, headers=mock_req_headers
+        "/api/v1/tests",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
     )
 
     assert "Only 'set_message' allowed in body" in response.json["error"]
@@ -69,7 +77,10 @@ def test_tests_endpoint_post_route_success(client):
     mock_type = "application/json"
 
     response = client.post(
-        "/tests", json=mock_data, content_type=mock_type, headers=mock_req_headers
+        "/api/v1/tests",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
     )
 
     assert request.json == mock_data
