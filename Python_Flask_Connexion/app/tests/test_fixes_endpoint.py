@@ -12,10 +12,14 @@ auth = os.environ.get("OAUTH_AUTHENTICATION")
 @pytest.mark.order(11)
 def test_fixes_endpoint_no_auth(client):
 
-    mock_data = {"set_message": "Hello World", "mymessage": "sending req", "flask_app": "True"}
+    mock_data = {
+        "set_message": "Hello World",
+        "mymessage": "sending req",
+        "flask_app": "True",
+    }
     mock_type = "application/json"
 
-    response = client.put("/fixes/id/1", json=mock_data, content_type=mock_type)
+    response = client.put("/api/v1/fixes/id/1", json=mock_data, content_type=mock_type)
 
     assert response.status_code == 401
 
@@ -24,10 +28,19 @@ def test_fixes_endpoint_no_auth(client):
 def test_fixes_endpoint_wrong_auth(client):
 
     mock_req_headers = {"Authorization": "Bearer BAD_TOKEN"}
-    mock_data = {"set_message": "Hello World", "mymessage": "sending req", "flask_app": "True"}
+    mock_data = {
+        "set_message": "Hello World",
+        "mymessage": "sending req",
+        "flask_app": "True",
+    }
     mock_type = "application/json"
 
-    response = client.put("/fixes/id/1", json=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.put(
+        "/api/v1/fixes/id/1",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
+    )
 
     assert response.status_code == 401
 
@@ -36,10 +49,19 @@ def test_fixes_endpoint_wrong_auth(client):
 def test_fixes_endpoint_wrong_endpoint_num(client):
 
     mock_req_headers = {"Authorization": auth}
-    mock_data = {"set_message": "Hello World", "mymessage": "sending req", "flask_app": "True"}
+    mock_data = {
+        "set_message": "Hello World",
+        "mymessage": "sending req",
+        "flask_app": "True",
+    }
     mock_type = "application/json"
 
-    response = client.put("/fixes/id/2", json=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.put(
+        "/api/v1/fixes/id/2",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
+    )
 
     assert "Valid id range: 1-1" in response.json["error"]
     assert response.status_code == 400
@@ -51,7 +73,9 @@ def test_fixes_endpoint_no_json_data(client):
     mock_req_headers = {"Authorization": auth}
     mock_type = "application/json"
 
-    response = client.put("/fixes/id/1", content_type=mock_type, headers=mock_req_headers)
+    response = client.put(
+        "/api/v1/fixes/id/1", content_type=mock_type, headers=mock_req_headers
+    )
 
     assert "Data must be sent as JSON" in response.json["error"]
     assert response.status_code == 400
@@ -64,7 +88,12 @@ def test_fixes_endpoint_success_message_false(client):
     mock_data = {"set_message": False, "mymessage": "sending req", "flask_app": "True"}
     mock_type = "application/json"
 
-    response = client.put("/fixes/id/1", json=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.put(
+        "/api/v1/fixes/id/1",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
+    )
 
     assert response.json == mock_data
     assert response.status_code == 201
@@ -74,10 +103,19 @@ def test_fixes_endpoint_success_message_false(client):
 def test_fixes_endpoint_success_message_true(client):
 
     mock_req_headers = {"Authorization": auth}
-    mock_data = {"set_message": "Hello World", "mymessage": "sending req", "flask_app": "True"}
+    mock_data = {
+        "set_message": "Hello World",
+        "mymessage": "sending req",
+        "flask_app": "True",
+    }
     mock_type = "application/json"
 
-    response = client.put("/fixes/id/1", json=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.put(
+        "/api/v1/fixes/id/1",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
+    )
 
     assert response.json == mock_data
     assert response.status_code == 201
@@ -90,7 +128,12 @@ def test_fixes_endpoint_success_no_message(client):
     mock_data = {"mymessage": "sending req", "flask_app": "True"}
     mock_type = "application/json"
 
-    response = client.put("/fixes/id/1", json=mock_data, content_type=mock_type, headers=mock_req_headers)
+    response = client.put(
+        "/api/v1/fixes/id/1",
+        json=mock_data,
+        content_type=mock_type,
+        headers=mock_req_headers,
+    )
 
     assert response.json == mock_data
     assert response.status_code == 201
