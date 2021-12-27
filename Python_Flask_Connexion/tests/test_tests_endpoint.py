@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from flask import request
 
-load_dotenv(dotenv_path=os.path.dirname(os.path.realpath(__file__)) + "/../.env")
+load_dotenv()
 auth = os.environ.get("BASIC_AUTHENTICATION")
 
 
