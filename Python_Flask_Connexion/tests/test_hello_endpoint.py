@@ -52,3 +52,42 @@ def test_hello_endpoint_after_post(client):
     assert response.status_code == 200
     assert response.get_json() == expected_data
     assert response.headers.get("Authorization") is None
+
+
+@pytest.mark.order(16)
+def test_hello_endpoint_again_after_put_endpoint_false(client):
+
+    response = client.get("/api/v1/hello?message=TEST")
+    expected_data = {"message": "TEST"}
+
+    assert response.headers.get("set_message") is None
+    assert request.args["message"] == "TEST"
+    assert response.status_code == 200
+    assert response.get_json() == expected_data
+    assert response.headers.get("Authorization") is None
+
+
+@pytest.mark.order(18)
+def test_hello_endpoint_again_after_out_endpoint_true(client):
+
+    response = client.get("/api/v1/hello?message=TEST")
+    expected_data = {"message": "TEST"}
+
+    assert response.headers.get("set_message") == "Hello World"
+    assert request.args["message"] == "TEST"
+    assert response.status_code == 200
+    assert response.get_json() == expected_data
+    assert response.headers.get("Authorization") is None
+
+
+@pytest.mark.order(20)
+def test_hello_endpoint_again_after_put_endpoint_missing(client):
+
+    response = client.get("/api/v1/hello?message=TEST")
+    expected_data = {"message": "TEST"}
+
+    assert response.headers.get("set_message") is None
+    assert request.args["message"] == "TEST"
+    assert response.status_code == 200
+    assert response.get_json() == expected_data
+    assert response.headers.get("Authorization") is None
